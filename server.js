@@ -18,7 +18,14 @@ app.get('/test', (request, response) => {
   // STEP 2. use the jsonwebtoken library to verify that it is a valid jwt
   // jsonwebtoken dock - https://www.npmjs.com/package/jsonwebtoken
   // STEP 3: to prove that everything is working correctly, send the opened jwt back to the front-end
+  const token = request.headers.authorization.split(' ')[1];
 
+  jwt.verify(token, getKey, {}, function(err, user) {
+    if(err){
+      response.send('invalid token');
+    }
+    response.send(user);
+  });
 })
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
