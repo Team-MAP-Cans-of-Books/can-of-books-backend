@@ -34,7 +34,16 @@ const User = require('./models/User');
 
 const userProfile = new User({
   useremail: 'mohsin.behi@gmail.com',
-  books: [{name: 'Catch 22'}, {name: 'Hello'}, {name: 'Spiderman'}]
+  books: [
+    {name: 'Spiderman',
+    description: 'Superhero',
+    status: 'Have not read'},
+    {name: 'Lord of the Rings',
+    description: 'Fantasy',
+    status: 'Have read'}, 
+    {name: 'Harry Potter',
+    description: 'Fantasy',
+    status: 'Have read'}]
 })
 
 userProfile.save().then(() => console.log('successful connection'));
