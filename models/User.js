@@ -3,14 +3,20 @@ const mongoose = require('mongoose');
 
 const BookSchema = new mongoose.Schema({
   name: {type: String},
-  description: {type: String},
-  status: {type: String}
+  author: {type: String},
 });
+
+const BookModel = mongoose.model('Book', BookSchema);
 
 const UserSchema = new mongoose.Schema({
   username: {type: String},
-  useremail: {type: String},
+  useremail: {type: String, unique: true},
   books: [BookSchema]
 });
 
-module.exports = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
+
+module.exports = {
+  UserModel,
+  BookModel,
+}
