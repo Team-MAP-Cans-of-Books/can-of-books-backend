@@ -135,9 +135,10 @@ app.post('/books', (request, response) => {
   }
 });
 
-app.delete(`/books/:${bookDel}`, (request, response) => {
-  const bookName = request.params.bookId;
-
+app.delete('/books', (request, response) => {
+  const bookName = request.query.bookName;
+  
+  const token = request.headers.authorization.split(' ')[1];
   verifyToken(token, deleteBook);
 
   async function deleteBook(user) {
@@ -148,7 +149,11 @@ app.delete(`/books/:${bookDel}`, (request, response) => {
 
     let singleUser = usersFromDB[0];
 
-    singleUser.books = singleUser.books.filter(book => bookName !== request.params.id);
+    let pleaseWork = singleUser.books.filter((book, index) => bookName !== book.name);
+
+    singleUser.books = pleaseWork
+    
+    console.log(singleUser);
 
     singleUser.save().then(userData => {
       console.log(userData.books)
