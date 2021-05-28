@@ -135,7 +135,7 @@ app.post('/books', (request, response) => {
   }
 });
 
-app.delete('/books/:bookId', (request, response) => {
+app.delete(`/books/:${bookDel}`, (request, response) => {
   const bookName = request.params.bookId;
 
   verifyToken(token, deleteBook);
